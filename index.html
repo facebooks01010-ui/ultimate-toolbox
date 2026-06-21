@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ultimate Toolbox - 10 Free Utilities</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    
+    <!-- QRCode.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f1a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* ===== HEADER ===== */
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(145deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d2ff, #7a5cff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            color: #8888aa;
+            margin-top: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .header .badge {
+            display: inline-block;
+            margin-top: 12px;
+            background: rgba(0, 210, 255, 0.15);
+            color: #00d2ff;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+        }
+        
+        /* ===== TOOLS GRID ===== */
+        .tools-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+        }
+        
+        /* ===== TOOL CARD ===== */
+        .tool-card {
+            background: linear-gradient(145deg, #1a1a2e, #14142a);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            border-color: rgba(0, 210, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .tool-card .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .tool-card .tool-header i {
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 210, 255, 0.1);
+            border-radius: 12px;
+            color: #00d2ff;
+        }
+        
+        .tool-card .tool-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .tool-card .tool-header .free-badge {
+            margin-left: auto;
+            background: rgba(0, 210, 255, 0.12);
+            color: #00d2ff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .tool-card .tool-body {
+            min-height: 80px;
+        }
+        
+        .tool-card .tool-body input,
+        .tool-card .tool-body select,
+        .tool-card .tool-body textarea {
+            width: 100%;
+            padding: 10px 14px;
+            background: #0f0f1f;
+            border: 1px solid #2a2a44;
+            border-radius: 10px;
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            transition: border 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .tool-card .tool-body input:focus,
+        .tool-card .tool-body select:focus,
+        .tool-card .tool-body textarea:focus {
+            outline: none;
+            border-color: #00d2ff;
+        }
+        
+        .tool-card .tool-body textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .tool-card .tool-body button {
+            margin-top: 10px;
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #00d2ff, #7a5cff);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        
+        .tool-card .tool-body button:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        
+        .tool-card .tool-body .output {
+            margin-top: 12px;
+            padding: 12px;
+            background: #0f0f1f;
+            border-radius: 10px;
+            border: 1px solid #1f1f3a;
+            word-break: break-all;
+            font-size: 0.9rem;
+            min-height: 40px;
+            color: #aab;
+        }
+        
+        .tool-card .tool-body .output.success {
+            border-color: #00d2ff;
+            color: #00d2ff;
+        }
+        
+        /* ===== QR CODE OUTPUT ===== */
+        #qrcode-output {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        
+        #qrcode-output img,
+        #qrcode-output canvas {
+            border-radius: 8px;
+            background: #fff;
+            padding: 8px;
+        }
+        
+        /* ===== COLOR PICKER ===== */
+        #color-picker {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ===== AD PLACEHOLDER ===== */
+        .ad-placeholder {
+            max-width: 1200px;
+            margin: 30px auto 10px;
+            padding: 20px;
+            text-align: center;
+            background: #1a1a2e;
+            border-radius: 12px;
+            border: 1px dashed #2a2a44;
+            color: #555577;
+            font-size: 0.85rem;
+        }
+        
+        .ad-placeholder span {
+            color: #00d2ff;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            text-align: center;
+            padding: 20px;
+            color: #444466;
+            font-size: 0.8rem;
+            border-top: 1px solid #1a1a2e;
+        }
+        
+        .footer a {
+            color: #6666aa;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer a:hover {
+            color: #00d2ff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================== -->
+    <!-- HEADER                         -->
+    <!-- ============================== -->
+    <header class="header">
+        <h1>⚡ Ultimate Toolbox</h1>
+        <p>10 Free Utilities — One Powerful Dashboard</p>
+        <div class="badge">🔥 100% Free • No Signup • No Limits</div>
+    </header>
+
+    <!-- ============================== -->
+    <!-- TOOLS GRID                     -->
+    <!-- ============================== -->
+    <div class="tools-grid">
+
+        <!-- ============================================================ -->
+        <!-- TOOL 1: What's My IP                                          -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-ip">
+            <div class="tool-header">
+                <i class="fas fa-network-wired"></i>
+                <h2>What's My IP</h2>
+                <span class="free-badge">Live</span>
+            </div>
+            <div class="tool-body">
+                <button onclick="getMyIP()" style="margin-bottom: 10px;">
+                    <i class="fas fa-sync-alt"></i> Get My IP
+                </button>
+                <div class="output" id="ip-output">Click the button to see your IP.</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 2: Time Zone Converter                                   -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-time">
+            <div class="tool-header">
+                <i class="fas fa-globe-americas"></i>
+                <h2>Time Zone Converter</h2>
+                <span class="free-badge">Live</span>
+            </div>
+            <div class="tool-body">
+                <select id="tz-from" style="margin-bottom: 8px;">
+                    <option value="America/New_York">USA (EST)</option>
+                    <option value="America/Los_Angeles">USA (PST)</option>
+                    <option value="Europe/London">UK (GMT)</option>
+                    <option value="Europe/Paris">Europe (CET)</option>
+                    <option value="Asia/Dubai">Dubai (GST)</option>
+                    <option value="Asia/Kolkata">India (IST)</option>
+                    <option value="Asia/Tokyo">Japan (JST)</option>
+                    <option value="Australia/Sydney">Australia (AEST)</option>
+                </select>
+                <select id="tz-to" style="margin-bottom: 8px;">
+                    <option value="Asia/Kolkata">India (IST)</option>
+                    <option value="America/New_York">USA (EST)</option>
+                    <option value="America/Los_Angeles">USA (PST)</option>
+                    <option value="Europe/London">UK (GMT)</option>
+                    <option value="Europe/Paris">Europe (CET)</option>
+                    <option value="Asia/Dubai">Dubai (GST)</option>
+                    <option value="Asia/Tokyo">Japan (JST)</option>
+                    <option value="Australia/Sydney">Australia (AEST)</option>
+                </select>
+                <button onclick="convertTime()"><i class="far fa-clock"></i> Convert Time</button>
+                <div class="output" id="time-output">Select timezones and click convert.</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 3: Image Converter (JPG ↔ PNG ↔ WEBP)                   -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-image">
+            <div class="tool-header">
+                <i class="fas fa-image"></i>
+                <h2>Image Converter</h2>
+                <span class="free-badge">Upload</span>
+            </div>
+            <div class="tool-body">
+                <input type="file" id="image-input" accept="image/*" style="margin-bottom: 8px;" />
+                <select id="image-format" style="margin-bottom: 8px;">
+                    <option value="image/png">PNG</option>
+                    <option value="image/jpeg">JPG</option>
+                    <option value="image/webp">WEBP</option>
+                </select>
+                <button onclick="convertImage()"><i class="fas fa-exchange-alt"></i> Convert &amp; Download</button>
+                <div class="output" id="image-output">Upload an image, select format, and convert.</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 4: Online Stopwatch                                     -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-stopwatch">
+            <div class="tool-header">
+                <i class="fas fa-stopwatch"></i>
+                <h2>Online Stopwatch</h2>
+                <span class="free-badge">Live</span>
+            </div>
+            <div class="tool-body">
+                <div class="output" id="stopwatch-display" style="font-size: 2rem; text-align: center; font-weight: 700; color: #00d2ff;">
+                    00:00:00
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="startStopwatch()" style="flex:1;"><i class="fas fa-play"></i> Start</button>
+                    <button onclick="stopStopwatch()" style="flex:1; background: #ff6b6b;"><i class="fas fa-stop"></i> Stop</button>
+                    <button onclick="resetStopwatch()" style="flex:1; background: #4a4a6a;"><i class="fas fa-undo"></i> Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 5: QR Code Generator                                    -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-qr">
+            <div class="tool-header">
+                <i class="fas fa-qrcode"></i>
+                <h2>QR Code Generator</h2>
+                <span class="free-badge">Instant</span>
+            </div>
+            <div class="tool-body">
+                <input type="text" id="qr-input" placeholder="Enter URL or text..." value="https://example.com" style="margin-bottom: 8px;" />
+                <button onclick="generateQR()"><i class="fas fa-qrcode"></i> Generate QR</button>
+                <div class="output" id="qrcode-output"></div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 6: Unit Converter                                       -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-unit">
+            <div class="tool-header">
+                <i class="fas fa-ruler-combined"></i>
+                <h2>Unit Converter</h2>
+                <span class="free-badge">Live</span>
+            </div>
+            <div class="tool-body">
+                <select id="unit-type" style="margin-bottom: 8px;">
+                    <option value="length">Length</option>
+                    <option value="weight">Weight</option>
+                    <option value="temperature">Temperature</option>
+                </select>
+                <input type="number" id="unit-value" placeholder="Enter value..." value="1" style="margin-bottom: 8px;" />
+                <select id="unit-from" style="margin-bottom: 8px;">
+                    <option value="km">Kilometers</option>
+                    <option value="m">Meters</option>
+                    <option value="cm">Centimeters</option>
+                    <option value="mi">Miles</option>
+                    <option value="ft">Feet</option>
+                    <option value="in">Inches</option>
+                </select>
+                <select id="unit-to" style="margin-bottom: 8px;">
+                    <option value="mi">Miles</option>
+                    <option value="km">Kilometers</option>
+                    <option value="m">Meters</option>
+                    <option value="cm">Centimeters</option>
+                    <option value="ft">Feet</option>
+                    <option value="in">Inches</option>
+                </select>
+                <button onclick="convertUnit()"><i class="fas fa-arrows-alt-h"></i> Convert</button>
+                <div class="output" id="unit-output">Enter a value and click convert.</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 7: Color Picker / Hex Converter                         -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-color">
+            <div class="tool-header">
+                <i class="fas fa-palette"></i>
+                <h2>Color Picker</h2>
+                <span class="free-badge">Live</span>
+            </div>
+            <div class="tool-body">
+                <input type="color" id="color-picker" value="#00d2ff" />
+                <div style="display: flex; gap: 8px; margin-top: 8px;">
+                    <input type="text" id="color-hex" placeholder="#HEX" value="#00d2ff" style="flex: 1;" />
+                    <input type="text" id="color-rgb" placeholder="RGB" value="rgb(0, 210, 255)" style="flex: 1;" />
+                </div>
+                <button onclick="updateColor()"><i class="fas fa-sync-alt"></i> Update Color</button>
+                <div class="output" id="color-output" style="background: #00d2ff; color: #000; font-weight: 600;">
+                    Preview Color
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 8: PDF Merger (Simple demo using PDF-Lib)              -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-pdf">
+            <div class="tool-header">
+                <i class="fas fa-file-pdf"></i>
+                <h2>PDF Merger</h2>
+                <span class="free-badge">Upload</span>
+            </div>
+            <div class="tool-body">
+                <input type="file" id="pdf-input" accept=".pdf" multiple style="margin-bottom: 8px;" />
+                <button onclick="mergePDF()"><i class="fas fa-object-ungroup"></i> Merge PDFs</button>
+                <div class="output" id="pdf-output">Upload 2+ PDFs and click merge (demo).</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 9: Password Generator                                   -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-password">
+            <div class="tool-header">
+                <i class="fas fa-key"></i>
+                <h2>Password Generator</h2>
+                <span class="free-badge">Instant</span>
+            </div>
+            <div class="tool-body">
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <input type="number" id="pass-length" value="16" min="6" max="64" style="flex: 1;" />
+                    <label style="display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: #aab;">
+                        <input type="checkbox" id="pass-symbols" checked /> Symbols
+                    </label>
+                </div>
+                <button onclick="generatePassword()"><i class="fas fa-shield-alt"></i> Generate Password</button>
+                <div class="output" id="password-output" style="font-family: monospace; font-size: 1.1rem;">Click to generate</div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- TOOL 10: Text to Speech                                      -->
+        <!-- ============================================================ -->
+        <div class="tool-card" id="tool-tts">
+            <div class="tool-header">
+                <i class="fas fa-volume-up"></i>
+                <h2>Text to Speech</h2>
+                <span class="free-badge">Speak</span>
+            </div>
+            <div class="tool-body">
+                <textarea id="tts-text" placeholder="Enter text to speak..." rows="2">Hello, this is a free text to speech utility.</textarea>
+                <button onclick="speakText()"><i class="fas fa-play"></i> Speak</button>
+                <div class="output" id="tts-output">Click "Speak" to hear your text.</div>
+            </div>
+        </div>
+
+    </div><!-- /tools-grid -->
+
+    <!-- ============================== -->
+    <!-- AD PLACEHOLDER                 -->
+    <!-- ============================== -->
+    <div class="ad-placeholder">
+        📢 <span>Ad Space</span> — Google AdSense will appear here once approved.
+    </div>
+
+    <!-- ============================== -->
+    <!-- FOOTER                         -->
+    <!-- ============================== -->
+    <footer class="footer">
+        <p>
+            <a href="#">Privacy Policy</a> •
+            <a href="#">Contact</a> •
+            <a href="#">About</a>
+        </p>
+        <p style="margin-top: 6px;">© 2026 Ultimate Toolbox — Built with ❤️ for the world.</p>
+    </footer>
+
+    <!-- ============================== -->
+    <!-- JAVASCRIPT — ALL 10 TOOLS      -->
+    <!-- ============================== -->
+    <script>
+        // ================================================================
+        // TOOL 1: What's My IP
+        // ================================================================
+        function getMyIP() {
+            const output = document.getElementById('ip-output');
+            output.textContent = 'Fetching your IP...';
+            fetch('https://api.ipify.org?format=json')
+                .then(res => res.json())
+                .then(data => {
+                    output.textContent = '🌐 Your IP: ' + data.ip;
+                    output.className = 'output success';
+                })
+                .catch(() => {
+                    output.textContent = '❌ Could not fetch IP. Please try again.';
+                    output.className = 'output';
+                });
+        }
+
+        // ================================================================
+        // TOOL 2: Time Zone Converter
+        // ================================================================
+        function convertTime() {
+            const from = document.getElementById('tz-from').value;
+            const to = document.getElementById('tz-to').value;
+            const now = new Date();
+            const fromTime = now.toLocaleString('en-US', { timeZone: from, hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true });
+            const toTime = now.toLocaleString('en-US', { timeZone: to, hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: true });
+            document.getElementById('time-output').textContent =
+                `🕐 ${from.replace('_', ' ')}: ${fromTime}  →  ${to.replace('_', ' ')}: ${toTime}`;
+        }
+
+        // ================================================================
+        // TOOL 3: Image Converter
+        // ================================================================
+        function convertImage() {
+            const fileInput = document.getElementById('image-input');
+            const format = document.getElementById('image-format').value;
+            const output = document.getElementById('image-output');
+            if (!fileInput.files.length) {
+                output.textContent = '⚠️ Please upload an image first.';
+                return;
+            }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    const link = document.createElement('a');
+                    link.download = 'converted.' + format.split('/')[1];
+                    link.href = canvas.toDataURL(format, 0.92);
+                    link.click();
+                    output.textContent = '✅ Converted and downloaded successfully!';
+                    output.className = 'output success';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // ================================================================
+        // TOOL 4: Stopwatch
+        // ================================================================
+        let stopwatchInterval = null;
+        let stopwatchSeconds = 0;
+
+        function updateStopwatchDisplay() {
+            const h = String(Math.floor(stopwatchSeconds / 3600)).padStart(2, '0');
+            const m = String(Math.floor((stopwatchSeconds % 3600) / 60)).padStart(2, '0');
+            const s = String(stopwatchSeconds % 60).padStart(2, '0');
+            document.getElementById('stopwatch-display').textContent = `${h}:${m}:${s}`;
+        }
+
+        function startStopwatch() {
+            if (stopwatchInterval) return;
+            stopwatchInterval = setInterval(() => {
+                stopwatchSeconds++;
+                updateStopwatchDisplay();
+            }, 1000);
+        }
+
+        function stopStopwatch() {
+            clearInterval(stopwatchInterval);
+            stopwatchInterval = null;
+        }
+
+        function resetStopwatch() {
+            stopStopwatch();
+            stopwatchSeconds = 0;
+            updateStopwatchDisplay();
+        }
+
+        // ================================================================
+        // TOOL 5: QR Code Generator
+        // ================================================================
+        let qrCodeInstance = null;
+
+        function generateQR() {
+            const input = document.getElementById('qr-input').value.trim();
+            const container = document.getElementById('qrcode-output');
+            container.innerHTML = '';
+            if (!input) {
+                container.textContent = '⚠️ Please enter a URL or text.';
+                return;
+            }
+            try {
+                qrCodeInstance = new QRCode(container, {
+                    text: input,
+                    width: 160,
+                    height: 160,
+                    colorDark: '#000000',
+                    colorLight: '#ffffff',
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            } catch (e) {
+                container.textContent = '❌ Error generating QR code.';
+            }
+        }
+
+        // Auto-generate QR on load
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(generateQR, 100);
+        });
+
+        // ================================================================
+        // TOOL 6: Unit Converter
+        // ================================================================
+        const unitConversions = {
+            length: { km: 1000, m: 1, cm: 0.01, mi: 1609.344, ft: 0.3048, in: 0.0254 },
+            weight: { kg: 1, g: 0.001, lb: 0.453592, oz: 0.0283495 },
+            temperature: {} // special case
+        };
+
+        function convertUnit() {
+            const type = document.getElementById('unit-type').value;
+            const value = parseFloat(document.getElementById('unit-value').value);
+            const from = document.getElementById('unit-from').value;
+            const to = document.getElementById('unit-to').value;
+            const output = document.getElementById('unit-output');
+
+            if (isNaN(value) || value < 0) {
+                output.textContent = '⚠️ Please enter a valid positive number.';
+                return;
+            }
+
+            let result;
+
+            if (type === 'temperature') {
+                // Celsius as base
+                let celsius;
+                if (from === 'c') celsius = value;
+                else if (from === 'f') celsius = (value - 32) * 5 / 9;
+                else if (from === 'k') celsius = value - 273.15;
+                else { output.textContent = '⚠️ Invalid temperature unit.'; return; }
+
+                if (to === 'c') result = celsius;
+                else if (to === 'f') result = celsius * 9 / 5 + 32;
+                else if (to === 'k') result = celsius + 273.15;
+                else { output.textContent = '⚠️ Invalid temperature unit.'; return; }
+                output.textContent = `${value}°${from.toUpperCase()} = ${result.toFixed(2)}°${to.toUpperCase()}`;
+                return;
+            }
+
+            // Length / Weight
+            const baseUnit = unitConversions[type];
+            if (!baseUnit || !baseUnit[from] || !baseUnit[to]) {
+                output.textContent = '⚠️ Invalid unit for this type.';
+                return;
+            }
+            const inBase = value * baseUnit[from];
+            result = inBase / baseUnit[to];
+            output.textContent = `${value} ${from} = ${result.toFixed(4)} ${to}`;
+        }
+
+        // ================================================================
+        // TOOL 7: Color Picker
+        // ================================================================
+        function updateColor() {
+            const picker = document.getElementById('color-picker');
+            const hex = document.getElementById('color-hex');
+            const rgb = document.getElementById('color-rgb');
+            const preview = document.getElementById('color-output');
+
+            let color = picker.value;
+            hex.value = color;
+            // Convert HEX to RGB
+            const r = parseInt(color.slice(1, 3), 16);
+            const g = parseInt(color.slice(3, 5), 16);
+            const b = parseInt(color.slice(5, 7), 16);
+            rgb.value = `rgb(${r}, ${g}, ${b})`;
+            preview.style.background = color;
+            preview.textContent = `🎨 ${color}  •  rgb(${r}, ${g}, ${b})`;
+        }
+
+        // Color picker change event
+        document.getElementById('color-picker').addEventListener('input', updateColor);
+
+        // ================================================================
+        // TOOL 8: PDF Merger (Demo)
+        // ================================================================
+        function mergePDF() {
+            const input = document.getElementById('pdf-input');
+            const output = document.getElementById('pdf-output');
+            if (!input.files || input.files.length < 2) {
+                output.textContent = '⚠️ Please select at least 2 PDF files.';
+                return;
+            }
+            output.textContent = `✅ ${input.files.length} PDFs selected. (Full merge requires PDF-Lib library — demo only)`;
+            output.className = 'output success';
+        }
+
+        // ================================================================
+        // TOOL 9: Password Generator
+        // ================================================================
+        function generatePassword() {
+            const length = parseInt(document.getElementById('pass-length').value) || 16;
+            const useSymbols = document.getElementById('pass-symbols').checked;
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' +
+                (useSymbols ? '!@#$%^&*()_+-=[]{}|;:,.<>?' : '');
+            let password = '';
+            for (let i = 0; i < length; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById('password-output').textContent = password;
+            document.getElementById('password-output').className = 'output success';
+        }
+
+        // ================================================================
+        // TOOL 10: Text to Speech
+        // ================================================================
+        function speakText() {
+            const text = document.getElementById('tts-text').value.trim();
+            const output = document.getElementById('tts-output');
+            if (!text) {
+                output.textContent = '⚠️ Please enter some text to speak.';
+                return;
+            }
+            if (!window.speechSynthesis) {
+                output.textContent = '❌ Text-to-speech is not supported in this browser.';
+                return;
+            }
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            utterance.lang = 'en-US';
+            window.speechSynthesis.speak(utterance);
+            output.textContent = '🔊 Speaking...';
+            output.className = 'output success';
+            utterance.onend = function() {
+                output.textContent = '✅ Done speaking!';
+            };
+        }
+
+        // ================================================================
+        // INIT: Auto-run on load
+        // ================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-fetch IP on load
+            getMyIP();
+            // Auto-convert time
+            convertTime();
+            // Auto-update color preview
+            updateColor();
+            // Auto-generate password
+            generatePassword();
+            // Auto-generate QR
+            setTimeout(generateQR, 200);
+        });
+    </script>
+
+</body>
+</html>
